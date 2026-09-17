@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Travel Planner Pro</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Hero Section -->
+
+    <div class="hero">
+
+        <h2>🌍 Discover Your Next Adventure</h2>
+
+        <p>
+            AI-powered travel planning in seconds
+        </p>
+
+        <a href="/history" class="history-btn">
+            📚 View Saved Trips
+        </a>
+
+    </div>
+
+    <!-- Main Heading -->
+
+    <h1>✈️ AI Travel Planner Pro</h1>
+
+    <p class="subtitle">
+        Create personalized travel itineraries with AI
+    </p>
+
+    <!-- Features -->
+
+    <div class="features">
+
+        <div class="feature-card">
+            🏨 Hotels
+        </div>
+
+        <div class="feature-card">
+            🍔 Food
+        </div>
+
+        <div class="feature-card">
+            🗺️ Itinerary
+        </div>
+
+        <div class="feature-card">
+            💰 Budget
+        </div>
+
+        <div class="feature-card">
+            🌤 Weather
+        </div>
+
+        <div class="feature-card">
+            🎒 Travel Tips
+        </div>
+
+    </div>
+
+    <!-- Planner Form -->
+
+    <div class="planner-card">
+
+        <form action="/plan" method="POST">
+
+            <input
+                type="text"
+                name="destination"
+                placeholder="Enter Destination (Paris, Tokyo, Dubai...)"
+                required>
+
+            <input
+                type="number"
+                name="days"
+                placeholder="Number of Days"
+                required>
+
+            <select name="budget">
+
+                <option value="Budget">
+                    Budget
+                </option>
+
+                <option value="Medium">
+                    Medium
+                </option>
+
+                <option value="Luxury">
+                    Luxury
+                </option>
+
+            </select>
+
+            <button type="submit">
+                Generate Travel Plan
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Results -->
+
+    {% if itinerary %}
+
+    <div class="destination-card">
+
+        <img
+            src="{{ image_url }}"
+            alt="{{ destination }}">
+
+        <h2>
+            📍 {{ destination }}
+        </h2>
+
+    </div>
+
+    <div class="result-card">
+
+        <h2>
+            🗺️ Complete Travel Guide
+        </h2>
+
+        <pre>{{ itinerary }}</pre>
+
+        <!-- PDF Download -->
+
+        <form action="/download_pdf" method="POST">
+
+            <input
+                type="hidden"
+                name="content"
+                value="{{ itinerary }}">
+
+            <button type="submit">
+                📄 Download PDF Guide
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
